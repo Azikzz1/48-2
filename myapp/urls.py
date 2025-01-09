@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import text_response, html_response
+from .views import PostListView, PostDetailView, html_response, text_response
 
 urlpatterns = [
-    path('text/', text_response),
-    path('html/', html_response),
+    path('posts/', PostListView.as_view(), name='post-list'),
+    path('posts/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('html/', html_response, name='html_response'),
+    path('text/', text_response, name='text_response'),
 ]
