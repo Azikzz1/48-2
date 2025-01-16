@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.http import HttpResponse
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 def index(request):
@@ -24,7 +26,8 @@ def index(request):
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('myapp/', include('myapp.urls')),
-    path('', index),
-]
+                  path('admin/', admin.site.urls),
+                  path('myapp/', include('myapp.urls')),
+                  path('', include('posts.urls')),
+                  path('', index),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
